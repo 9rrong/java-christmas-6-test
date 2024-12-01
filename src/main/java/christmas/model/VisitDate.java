@@ -8,6 +8,10 @@ public class VisitDate {
         this.value = value;
     }
 
+    public int getValue() {
+        return this.value;
+    }
+
     public static VisitDate ofValue(String visitDate) {
         int value = convertToInt(visitDate);
         validateInRange(value);

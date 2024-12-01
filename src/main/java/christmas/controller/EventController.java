@@ -18,7 +18,7 @@ public class EventController {
     public void run() {
         outputView.printGreeting();
 
-        retryUntilValid(() -> VisitDate.ofValue(inputView.askVisitDate()));
+        VisitDate visitDate = retryUntilValid(() -> VisitDate.ofValue(inputView.askVisitDate()));
 
     }
 
