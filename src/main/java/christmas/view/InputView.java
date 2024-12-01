@@ -10,4 +10,9 @@ public class InputView {
         System.out.println(VISIT_DATE_PROMPT);
         return Console.readLine();
     }
+
+    public String askMenuAndQuantity() {
+        System.out.println(MENU_AND_QUANTITY_PROMPT);
+        return Console.readLine();
+    }
 }
