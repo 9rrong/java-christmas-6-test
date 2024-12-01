@@ -1,6 +1,9 @@
-package christmas.model;
+package christmas.model.order;
 
 import christmas.dto.OrderDTO;
+import christmas.model.ErrorCode;
+import christmas.model.menu.Menu;
+import christmas.model.menu.MenuType;
 
 public class Order {
 
@@ -22,6 +25,14 @@ public class Order {
                 Menu.findByMenuName(menuName),
                 quantity
         );
+    }
+
+    public boolean isMenuType(MenuType menuType) {
+        return menu.getMenuType().equals(menuType);
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     private static void validateQuantityInRange(int quantity) {

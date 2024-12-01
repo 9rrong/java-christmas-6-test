@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.order.Orders;
 import christmas.model.VisitDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -19,6 +20,8 @@ public class EventController {
         outputView.printGreeting();
 
         VisitDate visitDate = retryUntilValid(() -> VisitDate.ofValue(inputView.askVisitDate()));
+        Orders orders = retryUntilValid(() ->Orders.ofValue(inputView.askMenuAndQuantity()));
+
 
     }
 
