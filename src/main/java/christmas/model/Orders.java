@@ -13,7 +13,7 @@ public class Orders {
     }
 
     public static Orders ofValue(String ordersInput) {
-        return new Orders(OrdersParser.parseOrders(ordersInput).stream()
+        return new Orders(OrdersParser.convertOrders(ordersInput).stream()
                 .map(Order::ofValue)
                 .collect(Collectors.toUnmodifiableList()));
     }

@@ -19,7 +19,7 @@ class OrdersParserTest {
                     new OrderDTO("타파스", 1),
                     new OrderDTO("제로콜라", 1)
             );
-            List<OrderDTO> actualOrders = OrdersParser.parseOrders(ordersInput);
+            List<OrderDTO> actualOrders = OrdersParser.convertOrders(ordersInput);
             assertThat(actualOrders).isEqualTo(expectedOrders);
 
         }
@@ -28,7 +28,7 @@ class OrdersParserTest {
             List<OrderDTO> expectedOrders = List.of(
                     new OrderDTO("해산물파스타", 2)
             );
-            List<OrderDTO> actualOrders = OrdersParser.parseOrders(ordersInput);
+            List<OrderDTO> actualOrders = OrdersParser.convertOrders(ordersInput);
             assertThat(actualOrders).isEqualTo(expectedOrders);
         }
     }
@@ -36,12 +36,12 @@ class OrdersParserTest {
     @ParameterizedTest
     @ValueSource(strings = {"1-2", "가-가", "가-2,", "가-2,3-3"})
     void 주문_잘못된_입력_예외테스트(String input) {
-        assertThrows(IllegalArgumentException.class, () -> OrdersParser.parseOrders(input));
+        assertThrows(IllegalArgumentException.class, () -> OrdersParser.convertOrders(input));
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     void 주문_공백_입력_예외테스트(String input) {
-        assertThrows(IllegalArgumentException.class, () -> OrdersParser.parseOrders(input));
+        assertThrows(IllegalArgumentException.class, () -> OrdersParser.convertOrders(input));
     }
 }
