@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.util.Arrays;
+
 public enum Menu {
     양송이수프(MenuType.APPETIZER, 6000),
     타파스(MenuType.APPETIZER, 5500),
@@ -20,5 +22,12 @@ public enum Menu {
     Menu(MenuType menuType, int price) {
         this.menuType = menuType;
         this.price = price;
+    }
+
+    public static Menu findByMenuName(String menuName) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.name().equals(menuName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorCode.MENU_NOT_FOUND.getMessage()));
     }
 }
