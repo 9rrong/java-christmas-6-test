@@ -1,7 +1,9 @@
 package christmas.controller;
 
+import christmas.model.VisitDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.function.Supplier;
 
 public class EventController {
 
@@ -16,5 +18,17 @@ public class EventController {
     public void run() {
         outputView.printGreeting();
 
+        retryUntilValid(() -> VisitDate.ofValue(inputView.askVisitDate()));
+
+    }
+
+    private <T> T retryUntilValid(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 }
