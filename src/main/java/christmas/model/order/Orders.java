@@ -2,8 +2,8 @@ package christmas.model.order;
 
 import christmas.model.menu.MenuType;
 import christmas.utils.OrdersParser;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Orders {
 
@@ -16,7 +16,19 @@ public class Orders {
     public static Orders ofValue(String ordersInput) {
         return new Orders(OrdersParser.convertOrders(ordersInput).stream()
                 .map(Order::ofValue)
-                .collect(Collectors.toUnmodifiableList()));
+                .toList());
+    }
+
+    public List<String> getOrderMenus() {
+        return orders.stream()
+                .map(Order::getOrderMenu)
+                .toList();
+    }
+
+    public int getPayment() {
+        return orders.stream()
+                .mapToInt(Order::getPrice)
+                .sum();
     }
 
     public int getQuantityByMenuType(MenuType menuType) {

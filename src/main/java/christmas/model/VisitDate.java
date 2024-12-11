@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.time.LocalDate;
+
 public class VisitDate {
 
     private final int value;
@@ -17,6 +19,10 @@ public class VisitDate {
         validateInRange(value);
 
         return new VisitDate(value);
+    }
+
+    public LocalDate toLocalDate() {
+        return LocalDate.of(2023, 12, value);
     }
 
     private static int convertToInt(String visitDate) {

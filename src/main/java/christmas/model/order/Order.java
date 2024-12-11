@@ -27,6 +27,14 @@ public class Order {
         );
     }
 
+    public String getOrderMenu() {
+        return menu.getMenuName() + " " + quantity + "개";
+    }
+
+    public int getPrice() {
+        return menu.getPrice() * quantity;
+    }
+
     public boolean isMenuType(MenuType menuType) {
         return menu.getMenuType().equals(menuType);
     }

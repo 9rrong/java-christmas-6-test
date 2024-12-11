@@ -9,7 +9,7 @@ public enum ErrorCode {
     ORDER_ILLEGAL_SYNTAX("유효하지 않은 주문입니다. 다시 입력해 주세요."),
     ORDER_MENU_DUPLICATED("유효하지 않은 주문입니다. 다시 입력해 주세요.");
 
-    private static final String ERROR_PREFIX = "[ERROR]";
+    private static final String ERROR_PREFIX = "[ERROR] ";
 
     private final String message;
 
