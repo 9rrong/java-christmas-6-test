@@ -1,5 +1,6 @@
 package christmas.model.order;
 
+import christmas.model.ErrorCode;
 import christmas.model.menu.MenuType;
 import christmas.utils.OrdersParser;
 
@@ -7,9 +8,12 @@ import java.util.List;
 
 public class Orders {
 
+    private static final int MENU_MAX_QUANTITY = 20;
+
     private final List<Order> orders;
 
     private Orders(List<Order> orders) {
+        validateOrders(orders);
         this.orders = orders;
     }
 
@@ -34,6 +38,27 @@ public class Orders {
     public int getQuantityByMenuType(MenuType menuType) {
         return orders.stream()
                 .filter(order -> order.isMenuType(menuType))
+                .mapToInt(Order::getQuantity)
+                .sum();
+    }
+
+    private void validateOrders(List<Order> orders) {
+        validateQuantity(orders);
+        validateOnlyDrink(orders);
+    }
+
+    private void validateOnlyDrink(List<Order> orders) {
+
+    }
+
+    private void validateQuantity(List<Order> orders) {
+        if (getTotalQuantity(orders) > MENU_MAX_QUANTITY) {
+            throw new IllegalArgumentException(ErrorCode.ORDER_QUANTITY_EXCEEDED.getMessage());
+        }
+    }
+
+    private int getTotalQuantity(List<Order> orders) {
+        return orders.stream()
                 .mapToInt(Order::getQuantity)
                 .sum();
     }
