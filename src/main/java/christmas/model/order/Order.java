@@ -31,6 +31,10 @@ public class Order {
         return menu.getMenuName() + " " + quantity + "개";
     }
 
+    public MenuType getMenuType() {
+        return menu.getMenuType();
+    }
+
     public int getPrice() {
         return menu.getPrice() * quantity;
     }

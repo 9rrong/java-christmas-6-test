@@ -6,6 +6,8 @@ import christmas.utils.OrdersParser;
 
 import java.util.List;
 
+import static christmas.model.menu.MenuType.DRINK;
+
 public class Orders {
 
     private static final int MENU_MAX_QUANTITY = 20;
@@ -48,7 +50,16 @@ public class Orders {
     }
 
     private void validateOnlyDrink(List<Order> orders) {
+        if (isOnlyDrink(orders)) {
+            throw new IllegalArgumentException(ErrorCode.ORDER_ONLY_DRINK.getMessage());
+        }
+    }
 
+    private boolean isOnlyDrink(List<Order> orders) {
+        return orders.stream()
+                .map(Order::getMenuType)
+                .distinct()
+                .equals(List.of(DRINK));
     }
 
     private void validateQuantity(List<Order> orders) {
