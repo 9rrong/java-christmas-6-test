@@ -31,6 +31,12 @@ public enum Discount {
             return 1000;
         }
         return 0;
+    }),
+    GIFT("증정 이벤트", (orders, date) -> {
+        if (isGift(orders)) {
+            return -25000;
+        }
+        return 0;
     });
 
     private final String discountName;
@@ -68,5 +74,13 @@ public enum Discount {
         int dayOfWeek = date.getDayOfWeek().getValue();
         List<Integer> specialDays = Arrays.asList(3, 10, 17, 24, 25, 31);
         return specialDays.contains(dayOfWeek);
+    }
+
+    private static boolean isGift(Orders orders) {
+        return orders.getPayment() > CHAMPAGNE_GIFT_TARGET_PRICE;
+    }
+
+    public String getDiscountName() {
+        return discountName;
     }
 }
